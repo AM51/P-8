@@ -35,6 +35,7 @@ import com.google.android.gms.fit.samples.common.logger.Log;
 import com.google.android.gms.fit.samples.common.logger.LogView;
 import com.google.android.gms.fit.samples.common.logger.LogWrapper;
 import com.google.android.gms.fit.samples.common.logger.MessageOnlyLogFilter;
+import com.google.android.gms.fit.samples.utils.Utils;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.data.Bucket;
 import com.google.android.gms.fitness.data.DataPoint;
@@ -89,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
             authInProgress = savedInstanceState.getBoolean(AUTH_PENDING);
         }
 
-        buildFitnessClient();
+        WorkoutLog workoutLog  = getIntent().getParcelableExtra(Utils.EXERCISE_NAME);
+        Log.e("archit",workoutLog.getExercise()+ " "+workoutLog.getRepetitions()+ " "+workoutLog.getWeight());
+        buildFitnessClient(workoutLog);
     }
 
     /**
@@ -100,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
      *  can address. Examples of this include the user never having signed in before, or
      *  having multiple accounts on the device and needing to specify which account to use, etc.
      */
-    private void buildFitnessClient() {
+    private void buildFitnessClient(final WorkoutLog workoutLog) {
         // Create the Google API Client
         mClient = new GoogleApiClient.Builder(this)
                 .addApi(Fitness.HISTORY_API)
@@ -112,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                                 Log.i(TAG, "Connected!!!");
                                 // Now you can make calls to the Fitness APIs.  What to do?
                                 // Look at some data!!
-                                new InsertAndVerifyDataTask().execute();
+                                new InsertAndVerifyDataTask().execute(workoutLog);
                             }
 
                             @Override
@@ -152,11 +155,12 @@ public class MainActivity extends AppCompatActivity {
      *  An example of an asynchronous call using a callback can be found in the example
      *  on deleting data below.
      */
-    private class InsertAndVerifyDataTask extends AsyncTask<Void, Void, Void> {
-        protected Void doInBackground(Void... params) {
+    private class InsertAndVerifyDataTask extends AsyncTask<WorkoutLog, Void, Void> {
+        protected Void doInBackground(WorkoutLog... params) {
             // Create a new dataset and insertion request.
             //DataSet dataSet = insertFitnessData();
-            DataSet dataSet = insertWorkoutData();
+            WorkoutLog workoutLog = params[0];
+            DataSet dataSet = insertWorkoutData(workoutLog);
 
 
             // [START insert_dataset]
@@ -202,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
      * Create and return a {@link DataSet} of step count data for insertion using the History API.
      */
 
-    private DataSet insertWorkoutData(){
+    private DataSet insertWorkoutData(WorkoutLog workoutLog){
 
         Log.i(TAG, "Creating a new data insert request for workout.");
 
@@ -221,11 +225,18 @@ public class MainActivity extends AppCompatActivity {
         DataPoint curls = DataPoint.create(dataSource);
         curls.setTimeInterval(now.getTime()-3600000,now.getTime(),TimeUnit.MILLISECONDS);
         //curls.setTimestamp(now.getTime(), TimeUnit.MILLISECONDS);
-        curls.getValue(Field.FIELD_EXERCISE).setString(WorkoutExercises.BICEP_CURL);
-        curls.getValue(Field.FIELD_REPETITIONS).setInt(10);
+//        curls.getValue(Field.FIELD_EXERCISE).setString(WorkoutExercises.BICEP_CURL);
+//        curls.getValue(Field.FIELD_REPETITIONS).setInt(10);
+//        curls.getValue(Field.FIELD_RESISTANCE_TYPE).setInt(Field.RESISTANCE_TYPE_DUMBBELL);
+//        curls.getValue(Field.FIELD_RESISTANCE).setFloat(20.0f);
+//        curls.getValue(Field.FIELD_DURATION).setInt(20);
+
+        curls.getValue(Field.FIELD_EXERCISE).setString(workoutLog.getExercise());
+        curls.getValue(Field.FIELD_REPETITIONS).setInt(workoutLog.getRepetitions());
         curls.getValue(Field.FIELD_RESISTANCE_TYPE).setInt(Field.RESISTANCE_TYPE_DUMBBELL);
-        curls.getValue(Field.FIELD_RESISTANCE).setFloat(20.0f);
+        curls.getValue(Field.FIELD_RESISTANCE).setFloat(workoutLog.getWeight());
         curls.getValue(Field.FIELD_DURATION).setInt(20);
+
 
 
         dataSet.add(curls);
