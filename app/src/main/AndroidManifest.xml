@@ -25,11 +25,13 @@ limitations under the License.
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <!-- <activity -->
         <!-- android:name=".MainActivity2" -->
@@ -43,11 +45,21 @@ limitations under the License.
             android:name=".MusclesActivity"
             android:label="@string/title_activity_muscles"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name=".data.WorkoutExerciseProvider"
+            android:authorities="com.google.android.gms.fit.samples" />
+
+        <activity
+            android:name=".InsertNewExerciseActivity"
+            android:label="@string/title_activity_insert_new_exercise"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
