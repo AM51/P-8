@@ -23,5 +23,7 @@
     <string name="title_activity_muscles">MusclesActivity</string>
     <string name="title_activity_insert_new_exercise">InsertNewExerciseActivity</string>
     <string name="title_activity_add_exercise_log">AddExerciseLogActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="title_activity_todays_workout">TodaysWorkoutActivity</string>
 
 </resources>

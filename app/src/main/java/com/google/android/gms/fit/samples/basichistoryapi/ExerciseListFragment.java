@@ -37,6 +37,7 @@ public class ExerciseListFragment extends ListFragment implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //
+
         String exercise = (String) this.getListAdapter().getItem(position);
         Log.e("archit",exercise);
         Intent intent = new Intent(getActivity().getApplicationContext(), AddExerciseLogActivity.class);
