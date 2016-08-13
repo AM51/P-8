@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             authInProgress = savedInstanceState.getBoolean(AUTH_PENDING);
         }
 
-        WorkoutLog workoutLog  = getIntent().getParcelableExtra(Utils.EXERCISE_NAME);
+        WorkoutLog workoutLog  = getIntent().getParcelableExtra(Utils.WORKOUT_LOG);
         Log.e("archit",workoutLog.getExercise()+ " "+workoutLog.getRepetitions()+ " "+workoutLog.getWeight());
         buildFitnessClient(workoutLog);
     }

@@ -36,12 +36,15 @@ public class ExerciseListFragment extends ListFragment implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        Intent intent = new Intent(getActivity().getApplicationContext(),InsertNewExerciseActivity.class);
+//
+        String exercise = (String) this.getListAdapter().getItem(position);
+        Log.e("archit",exercise);
+        Intent intent = new Intent(getActivity().getApplicationContext(), AddExerciseLogActivity.class);
+        intent.putExtra(Utils.EXERCISE_NAME,exercise);
         startActivity(intent);
 //        Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
 //        //todo here put mapping from ui text to workout exercise
-//        WorkoutLog workoutLog = new WorkoutLog(WorkoutExercises.BICEP_CURL,50,20.0f);
+//        WorkoutLog workoutLog = new WorkoutLog(WorkoutExercises.BICEP_CURL,45,20.0f);
 //        CharSequence exercise = ((TextView) view).getText();
 //        Log.e("archit",""+exercise);
 //        //intent.putExtra(Utils.EXERCISE_NAME,""+exercise);

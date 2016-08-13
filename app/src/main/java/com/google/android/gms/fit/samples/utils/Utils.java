@@ -6,4 +6,6 @@ package com.google.android.gms.fit.samples.utils;
 public class Utils {
 
     public static final String EXERCISE_NAME = "exercise_name";
+    public static final String WORKOUT_LOG = "workout_log";
+
 }

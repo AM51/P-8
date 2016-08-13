@@ -59,6 +59,10 @@ limitations under the License.
         <activity
             android:name=".InsertNewExerciseActivity"
             android:label="@string/title_activity_insert_new_exercise"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddExerciseLogActivity"
+            android:label="@string/title_activity_add_exercise_log"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
