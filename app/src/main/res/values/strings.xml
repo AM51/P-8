@@ -25,5 +25,6 @@
     <string name="title_activity_add_exercise_log">AddExerciseLogActivity</string>
     <string name="title_activity_calendar">CalendarActivity</string>
     <string name="title_activity_todays_workout">TodaysWorkoutActivity</string>
+    <string name="title_activity_add_exercise">AddExerciseActivity</string>
 
 </resources>

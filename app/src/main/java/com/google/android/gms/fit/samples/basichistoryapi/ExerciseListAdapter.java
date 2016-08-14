@@ -1,12 +1,16 @@
 package com.google.android.gms.fit.samples.basichistoryapi;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.google.android.gms.fit.samples.basichistoryapi.data.WorkoutExerciseContract;
+import com.google.android.gms.fit.samples.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -15,13 +19,15 @@ import java.util.ArrayList;
  */
 public class ExerciseListAdapter extends BaseAdapter{
 
+    private static final String selection = WorkoutExerciseContract.WorkoutExercise.TABLE_NAME+"."+ WorkoutExerciseContract.WorkoutExercise.COLUMN_EXERCISE_CATEGORY+"= ?";
     ArrayList<String> strings =new ArrayList<>();
     Context context;
 
-    public ExerciseListAdapter(Context context) {
+    public ExerciseListAdapter(Context context,String selectedMuscle) {
         this.context = context;
-        strings.add("Curl");
-        strings.add("Press");
+        buildExerciseListForMuscle(selectedMuscle);
+        //strings.add("Curl");
+        //strings.add("Press");
     }
 
 
@@ -50,6 +56,21 @@ public class ExerciseListAdapter extends BaseAdapter{
         textView.setHeight(100);
         //Log.v("archit",""+position+" "+strings.get(position));
         return textView;
+    }
+
+    private void buildExerciseListForMuscle(String muscle){
+        Log.e("test","Fetching exercise from db");
+        Cursor cursor = context.getContentResolver().query(WorkoutExerciseContract.WorkoutExercise.CONTENT_URI, null, selection, new String[]{muscle}, null);
+        //Cursor cursor = context.getContentResolver().query(WorkoutExerciseContract.WorkoutExercise.CONTENT_URI, null, null, null, null);
+        int ind = cursor.getColumnIndex(WorkoutExerciseContract.WorkoutExercise.COLUMN_EXERCISE_DISPLAY_NAME);
+        int ind1 = cursor.getColumnIndex(WorkoutExerciseContract.WorkoutExercise.COLUMN_EXERCISE_CATEGORY);
+
+        while (cursor.moveToNext()){
+            String exerciseName = cursor.getString(ind);
+            String category = cursor.getString(ind1);
+            strings.add(exerciseName);
+            Log.e("test","List element from db: "+exerciseName+" "+category);
+        }
     }
 
 

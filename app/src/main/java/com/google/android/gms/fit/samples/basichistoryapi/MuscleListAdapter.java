@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.google.android.gms.fit.samples.utils.Utils;
+
 import java.util.ArrayList;
 
 /**
@@ -20,9 +22,12 @@ public class MuscleListAdapter extends BaseAdapter {
 
     public MuscleListAdapter(Context context) {
         this.context = context;
-        strings.add("Shoulders");
-        strings.add("Triceps");
-        strings.add("Biceps");
+        strings.add(Utils.MUSCLE_CHEST);
+        strings.add(Utils.MUSCLE_BICEPS);
+        strings.add(Utils.MUSCLE_BACK);
+        strings.add(Utils.MUSCLE_SHOULDERS);
+        strings.add(Utils.MUSCLE_TRICEPS);
+        strings.add(Utils.MUSCLE_LEGS);
     }
 
 

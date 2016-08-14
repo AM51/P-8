@@ -11,5 +11,12 @@ public class Utils {
     public static final String WORKOUT_MONTH = "workout_month";
     public static final String WORKOUT_YEAR = "workout_year";
     public static final String WORKOUT_DATE = "workout_date";
+    public static final String MUSCLE_CHEST = "chest";
+    public static final String MUSCLE_BICEPS = "biceps";
+    public static final String MUSCLE_BACK = "back";
+    public static final String MUSCLE_SHOULDERS = "shoulders";
+    public static final String MUSCLE_TRICEPS = "triceps";
+    public static final String MUSCLE_LEGS = "legs";
+
 
 }

@@ -35,8 +35,11 @@ public class MuscleListFragment extends ListFragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.e("archit","Inside On Item Click");
+        Log.e("test","Inside On Item Click");
         Toast.makeText(getActivity().getApplicationContext(), "Itemm: " + position, Toast.LENGTH_SHORT).show();
+        String muscleSelected = (String)getListAdapter().getItem(position);
+        Log.e("test",muscleSelected);
+        ((MuscleFragmentCallback)getActivity()).onItemSelected(muscleSelected);
         Fragment newFragment = new ExerciseListFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 //        Fragment ml = getFragmentManager().findFragmentByTag("ML");
@@ -47,6 +50,13 @@ public class MuscleListFragment extends ListFragment implements AdapterView.OnIt
         transaction.replace(R.id.frameLayout, newFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public interface MuscleFragmentCallback {
+        /**
+         * DetailFragmentCallback for when an item has been selected.
+         */
+        public void onItemSelected(String muscle);
     }
 
 

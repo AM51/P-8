@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-public class MusclesActivity extends AppCompatActivity {
+public class MusclesActivity extends AppCompatActivity implements MuscleListFragment.MuscleFragmentCallback,ExerciseListFragment.ExerciseFragmentCallback{
 
+
+    String muscleSelected;
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +42,15 @@ public class MusclesActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onItemSelected(String muscle) {
+        this.muscleSelected = muscle;
+    }
+
+    @Override
+    public String getSelectedMuscle() {
+        return muscleSelected;
     }
 }

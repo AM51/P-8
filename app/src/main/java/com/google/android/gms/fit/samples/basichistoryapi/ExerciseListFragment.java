@@ -29,7 +29,9 @@ public class ExerciseListFragment extends ListFragment implements AdapterView.On
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        setListAdapter(new ExerciseListAdapter(getActivity().getApplicationContext()));
+        String selectedMuscle = ((ExerciseFragmentCallback) getActivity()).getSelectedMuscle();
+        Log.e("test","Selected Muscle :: "+selectedMuscle);
+        setListAdapter(new ExerciseListAdapter(getActivity().getApplicationContext(),selectedMuscle));
         getListView().setOnItemClickListener(this);
         super.onActivityCreated(savedInstanceState);
     }
@@ -51,5 +53,12 @@ public class ExerciseListFragment extends ListFragment implements AdapterView.On
 //        //intent.putExtra(Utils.EXERCISE_NAME,""+exercise);
 //        intent.putExtra(Utils.EXERCISE_NAME,workoutLog);
 //        startActivity(intent);
+    }
+
+    public interface ExerciseFragmentCallback {
+        /**
+         * DetailFragmentCallback for when an item has been selected.
+         */
+        public String getSelectedMuscle();
     }
 }
