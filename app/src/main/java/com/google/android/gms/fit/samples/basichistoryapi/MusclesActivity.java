@@ -1,6 +1,7 @@
 package com.google.android.gms.fit.samples.basichistoryapi;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -23,12 +24,12 @@ public class MusclesActivity extends AppCompatActivity implements MuscleListFrag
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         getFragmentManager().beginTransaction().replace(R.id.frameLayout,new MuscleListFragment()).addToBackStack(null).commit();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_muscle);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(),AddExerciseActivity.class);
+                startActivity(intent);
             }
         });
     }

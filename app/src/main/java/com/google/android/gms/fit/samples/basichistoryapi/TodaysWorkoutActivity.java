@@ -53,7 +53,7 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
         });
 
         //long currentDayTimeInMillis = getCurrentDayTimeInMillis();
-        long currentDayTimeInMillis = 1471026600000L;
+        long currentDayTimeInMillis = 1471113000000L;
         new InsertAndVerifyDataTask().execute(currentDayTimeInMillis);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -72,7 +72,7 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        long currentDayTimeInMillis = 1471026600000L;
+        long currentDayTimeInMillis = 1471113000000L;
         new InsertAndVerifyDataTask().execute(currentDayTimeInMillis);
     }
 
