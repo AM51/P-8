@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
@@ -17,19 +18,34 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.fit.samples.utils.Utils;
 import com.google.android.gms.fitness.Fitness;
+import com.google.android.gms.fitness.data.Bucket;
+import com.google.android.gms.fitness.data.DataPoint;
+import com.google.android.gms.fitness.data.DataSet;
+import com.google.android.gms.fitness.data.Field;
+import com.google.android.gms.fitness.data.Value;
 import com.google.android.gms.fitness.request.DataReadRequest;
 import com.google.android.gms.fitness.result.DataReadResult;
 
+import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static com.google.android.gms.fitness.data.Field.FIELD_EXERCISE;
+import static com.google.android.gms.fitness.data.Field.FIELD_REPETITIONS;
+import static com.google.android.gms.fitness.data.Field.FIELD_RESISTANCE;
+import static java.text.DateFormat.getTimeInstance;
 
 public class TodaysWorkoutActivity extends AppCompatActivity {
 
     ImageButton fetchWorkoutHistory;
     static final int WORKOUT_LOGS_REQUEST = 1;
     public static GoogleApiClient mClient = null;
+    private WorkoutLogsAdapter workoutLogsAdapter;
     public static final String TAG = "TodaysWorkoutLogActivity";
+
 
 
     @Override
@@ -52,8 +68,12 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
             }
         });
 
+        ListView listView = (ListView)findViewById(R.id.todaysWorkoutLogs);
+        workoutLogsAdapter = new WorkoutLogsAdapter(getApplicationContext());
+        listView.setAdapter(workoutLogsAdapter);
+
         //long currentDayTimeInMillis = getCurrentDayTimeInMillis();
-        long currentDayTimeInMillis = 1471113000000L;
+        long currentDayTimeInMillis = 1471199400000L;
         new InsertAndVerifyDataTask().execute(currentDayTimeInMillis);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -72,7 +92,7 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        long currentDayTimeInMillis = 1471113000000L;
+        long currentDayTimeInMillis = 1471199400000L;
         new InsertAndVerifyDataTask().execute(currentDayTimeInMillis);
     }
 
@@ -141,18 +161,62 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
                 .build();
     }
 
-    private class InsertAndVerifyDataTask extends AsyncTask<Long, Void, Void> {
+    private class InsertAndVerifyDataTask extends AsyncTask<Long, Void, List<WorkoutLog>> {
 
         @Override
-        protected Void doInBackground(Long... params) {
+        protected List<WorkoutLog> doInBackground(Long... params) {
             Log.e("archit","in async task"+ " "+params[0]);
             DataReadRequest readRequest = WorkoutHistoryHelper.queryWorkoutData(params[0]);
             DataReadResult dataReadResult =
                     Fitness.HistoryApi.readData(mClient, readRequest).await(1, TimeUnit.MINUTES);
             Log.e("archit","result fetched: "+dataReadResult.getBuckets().size());
-            dataReadResult.getBuckets().size();
-            WorkoutHistoryHelper.printData(dataReadResult);
+
+            if (dataReadResult.getBuckets().size() > 0) {
+
+                for (Bucket bucket : dataReadResult.getBuckets()) {
+                    List<DataSet> dataSets = bucket.getDataSets();
+                    for (DataSet dataSet : dataSets) {
+                        return parseDataset(dataSet);
+                    }
+                }
+            } else if (dataReadResult.getDataSets().size() > 0) {
+                for (DataSet dataSet : dataReadResult.getDataSets()) {
+                        return parseDataset(dataSet);
+                }
+            }
+
+            //WorkoutHistoryHelper.printData(dataReadResult);
             return null;
+        }
+
+
+        private List<WorkoutLog> parseDataset(DataSet dataSet){
+            DateFormat dateFormat = getTimeInstance();
+            List<WorkoutLog> workoutLogs = new ArrayList<>();
+            for (DataPoint dp : dataSet.getDataPoints()) {
+                WorkoutLog workoutLog = new WorkoutLog();
+                for(Field field : dp.getDataType().getFields()) {
+                    String fieldName = field.getName();
+                    Value dpValue = dp.getValue(field);
+                    Log.e("test",fieldName+" "+dpValue.toString());
+                    if (       fieldName.equals(FIELD_EXERCISE.getName())) {
+                        workoutLog.setExercise(dpValue.toString());
+                    } else if( fieldName.equals(FIELD_REPETITIONS.getName())){
+                        workoutLog.setRepetitions(Integer.parseInt(dpValue.toString()));
+                    } else if( fieldName.equals(FIELD_RESISTANCE.getName())){
+                      workoutLog.setWeight(Float.parseFloat(dpValue.toString()));
+                    }
+                }
+                workoutLogs.add(workoutLog);
+            }
+            return workoutLogs;
+        }
+
+        @Override
+        protected void onPostExecute(List<WorkoutLog> list) {
+            super.onPostExecute(list);
+            workoutLogsAdapter.setWorkoutLogs(list);
+            workoutLogsAdapter.notifyDataSetChanged();
         }
     }
 }

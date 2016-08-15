@@ -14,6 +14,9 @@ public class WorkoutLog implements Parcelable {
 
     private float weight;
 
+    public WorkoutLog() {
+    }
+
     public WorkoutLog(String exercise, int repetitions, float weight) {
         this.exercise = exercise;
         this.repetitions = repetitions;

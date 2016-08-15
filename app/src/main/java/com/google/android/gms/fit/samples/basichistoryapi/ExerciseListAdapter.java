@@ -25,7 +25,7 @@ public class ExerciseListAdapter extends BaseAdapter{
 
     public ExerciseListAdapter(Context context,String selectedMuscle) {
         this.context = context;
-        buildExerciseListForMuscle(selectedMuscle);
+        //buildExerciseListForMuscle(selectedMuscle);
         //strings.add("Curl");
         //strings.add("Press");
     }
@@ -73,6 +73,7 @@ public class ExerciseListAdapter extends BaseAdapter{
         }
     }
 
-
-
+    public void setStrings(ArrayList<String> strings) {
+        this.strings = strings;
+    }
 }
