@@ -52,7 +52,7 @@ public class WidgetService extends RemoteViewsService implements Loader.OnLoadCo
     @Override
     public void onCreate() {
         super.onCreate();
-        mCursorLoader = new CursorLoader(getApplicationContext(),WorkoutLogContract.WLog.buildUri(), null, null, null, null);
+        mCursorLoader = new CursorLoader(getApplicationContext(),WorkoutLogContract.WLog.CONTENT_URI, null, null, null, null);
         mCursorLoader.registerListener(0, this);
         mCursorLoader.startLoading();
     }

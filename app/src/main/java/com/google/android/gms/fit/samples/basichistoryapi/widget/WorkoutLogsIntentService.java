@@ -84,7 +84,7 @@ public class WorkoutLogsIntentService extends IntentService {
 //        }
 
 
-        List<WorkoutLog> logs = f();
+        List<WorkoutLog> logs = fetchLogs();
         Log.e("widgetTest",""+logs.size());
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
@@ -99,7 +99,7 @@ public class WorkoutLogsIntentService extends IntentService {
 
     }
 
-    private List<WorkoutLog> f(){
+    private List<WorkoutLog> fetchLogs(){
         DataReadRequest readRequest = WorkoutHistoryHelper.queryWorkoutData(1471199400000L);
         DataReadResult dataReadResult =
                 Fitness.HistoryApi.readData(mClient, readRequest).await(2, TimeUnit.MINUTES);
