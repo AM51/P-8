@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by archit.m on 03/08/16.
  */
-public class WorkoutLog implements Parcelable {
+public class WorkoutLog implements Parcelable,Comparable {
 
     private String exercise;
 
@@ -79,5 +79,10 @@ public class WorkoutLog implements Parcelable {
         dest.writeInt(repetitions);
         dest.writeFloat(weight);
 
+    }
+
+    @Override
+    public int compareTo(Object workoutLog) {
+        return this.exercise.compareTo(((WorkoutLog)workoutLog).exercise);
     }
 }

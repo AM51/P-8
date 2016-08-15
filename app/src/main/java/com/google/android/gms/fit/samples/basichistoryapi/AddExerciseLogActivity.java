@@ -28,7 +28,7 @@ public class AddExerciseLogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_exercise_log);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarExerciseLog);
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();

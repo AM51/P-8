@@ -29,6 +29,7 @@ import com.google.android.gms.fitness.result.DataReadResult;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -217,8 +218,14 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<WorkoutLog> list) {
             super.onPostExecute(list);
+            Collections.sort(list);
+            //organiseWorkoutLogs(list);
             workoutLogsAdapter.setWorkoutLogs(list);
             workoutLogsAdapter.notifyDataSetChanged();
+        }
+
+        private void organiseWorkoutLogs(List<WorkoutLog> list) {
+
         }
     }
 }

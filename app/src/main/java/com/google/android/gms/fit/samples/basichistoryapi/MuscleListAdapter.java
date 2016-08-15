@@ -3,6 +3,7 @@ package com.google.android.gms.fit.samples.basichistoryapi;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -53,6 +54,8 @@ public class MuscleListAdapter extends BaseAdapter {
         textView.setText(strings.get(position));
         textView.setTextColor(Color.BLACK);
         textView.setHeight(100);
+        textView.setGravity(Gravity.CENTER);
+        textView.setTextSize(20);
         //Log.v("archit",""+position+" "+strings.get(position));
         return textView;
     }
