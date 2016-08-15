@@ -25,6 +25,7 @@ public class WidgetService extends RemoteViewsService{
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
 
+        Log.e("archit","Returning remote views");
         List<WorkoutLog> workoutLogList = getWorkoutLogs();
         widgetDataProvider = new WidgetDataProvider(this, workoutLogList);
         return widgetDataProvider;

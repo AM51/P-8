@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.google.android.gms.fit.samples.basichistoryapi.R;
@@ -28,6 +29,8 @@ public class WorkoutLogsWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
+
+        Log.e("archit","Updating App");
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.collection_widget);
 //        views.setTextViewText(R.id.appwidget_text, widgetText);
 
@@ -68,6 +71,7 @@ public class WorkoutLogsWidget extends AppWidgetProvider {
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private static void setRemoteAdapter(Context context, @NonNull final RemoteViews views) {
+        Log.e("archit","Setting remote adapter1");
         views.setRemoteAdapter(R.id.widget_list,
                 new Intent(context, WidgetService.class));
     }
@@ -79,6 +83,7 @@ public class WorkoutLogsWidget extends AppWidgetProvider {
      */
     @SuppressWarnings("deprecation")
     private static void setRemoteAdapterV11(Context context, @NonNull final RemoteViews views) {
+        Log.e("archit","Setting remote adapter2");
         views.setRemoteAdapter(0, R.id.widget_list,
                 new Intent(context, WidgetService.class));
     }
@@ -88,8 +93,9 @@ public class WorkoutLogsWidget extends AppWidgetProvider {
         String action = intent.getAction();
         if (action.equals(DATABASE_CHANGED) || action.equals(Intent.ACTION_DATE_CHANGED))
         {
+            Log.e("archit","Received the intent");
             AppWidgetManager gm = AppWidgetManager.getInstance(context);
-            int[] ids = gm.getAppWidgetIds(new ComponentName(context, WidgetDataProvider.class));
+            int[] ids = gm.getAppWidgetIds(new ComponentName(context, WorkoutLogsWidget.class));
             this.onUpdate(context, gm, ids);
         }
         else
