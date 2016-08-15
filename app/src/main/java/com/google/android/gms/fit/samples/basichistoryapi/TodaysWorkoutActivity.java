@@ -44,6 +44,7 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
     static final int WORKOUT_LOGS_REQUEST = 1;
     public static GoogleApiClient mClient = null;
     private WorkoutLogsAdapter workoutLogsAdapter;
+    long currentDayTimeInMillis;
     public static final String TAG = "TodaysWorkoutLogActivity";
 
 
@@ -73,7 +74,7 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
         listView.setAdapter(workoutLogsAdapter);
 
         //long currentDayTimeInMillis = getCurrentDayTimeInMillis();
-        long currentDayTimeInMillis = 1471199400000L;
+        currentDayTimeInMillis = 1471199400000L;
         new InsertAndVerifyDataTask().execute(currentDayTimeInMillis);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -92,7 +93,7 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        long currentDayTimeInMillis = 1471199400000L;
+        //long currentDayTimeInMillis = 1471199400000L;
         new InsertAndVerifyDataTask().execute(currentDayTimeInMillis);
     }
 
@@ -111,6 +112,7 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
                 int workoutMonth = data.getIntExtra(Utils.WORKOUT_MONTH, 1);
                 int workoutYear = data.getIntExtra(Utils.WORKOUT_YEAR, 2000);
                 long workoutDate = data.getLongExtra(Utils.WORKOUT_DATE, 0L);
+                currentDayTimeInMillis = workoutDate;
                 Log.e("archit", "Date selected : " + workoutDay + " " + workoutMonth + " " + workoutYear + " " + workoutDate);
                 new InsertAndVerifyDataTask().execute(workoutDate);
                 //WorkoutHistoryHelper.queryWorkoutData(workoutDate);
@@ -169,7 +171,7 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
             DataReadRequest readRequest = WorkoutHistoryHelper.queryWorkoutData(params[0]);
             DataReadResult dataReadResult =
                     Fitness.HistoryApi.readData(mClient, readRequest).await(1, TimeUnit.MINUTES);
-            Log.e("archit","result fetched: "+dataReadResult.getBuckets().size());
+            Log.e("archit","result fetched: "+dataReadResult.getBuckets().size()+" "+dataReadResult.getDataSets().size());
 
             if (dataReadResult.getBuckets().size() > 0) {
 

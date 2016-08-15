@@ -60,8 +60,8 @@ public class WorkoutLogsAdapter extends BaseAdapter {
         WorkoutLog workoutLog = workoutLogs.get(position);
 
         exercise.setText(workoutLog.getExercise());
-        weight.setText(String.valueOf(workoutLog.getWeight()));
-        reps.setText(String.valueOf(workoutLog.getRepetitions()));
+        weight.setText(String.valueOf(workoutLog.getWeight()+" kgs"));
+        reps.setText(String.valueOf(workoutLog.getRepetitions()+ " reps"));
 
         return cardView;
     }
