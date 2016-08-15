@@ -32,7 +32,7 @@ public class WorkoutLogsWidget extends AppWidgetProvider {
 
         Log.e("archit","Updating App");
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.collection_widget);
-//        views.setTextViewText(R.id.appwidget_text, widgetText);
+        views.setTextViewText(R.id.widget_header, "changed");
 
         //context.startService(new Intent(context, WorkoutLogsIntentService.class));
 
@@ -42,7 +42,9 @@ public class WorkoutLogsWidget extends AppWidgetProvider {
         } else {
             setRemoteAdapterV11(context, views);
         }
+        Log.e("archit",""+appWidgetId);
         // Instruct the widget manager to update the widget
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 

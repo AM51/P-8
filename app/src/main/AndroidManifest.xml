@@ -60,7 +60,8 @@ limitations under the License.
 
         <provider
             android:name=".data.WorkoutLogsProvider"
-            android:authorities="com.google.android.gms.fit.samples.logs" />
+            android:authorities="com.google.android.gms.fit.samples.logs"
+            android:grantUriPermissions="true"/>
 
         <activity
             android:name=".InsertNewExerciseActivity"

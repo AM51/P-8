@@ -1,13 +1,16 @@
 package com.google.android.gms.fit.samples.basichistoryapi.widget;
 
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.google.android.gms.fit.samples.basichistoryapi.WorkoutLog;
+import com.google.android.gms.fit.samples.basichistoryapi.data.WorkoutLogContract;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,13 +23,13 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     private static final String TAG = "WidgetDataProvider";
 
+    ContentResolver contentResolver;
     List<String> mCollection = new ArrayList<>();
-    List<WorkoutLog> workoutLogs = new ArrayList<>();
     Context mContext = null;
 
-    public WidgetDataProvider(Context context,List<WorkoutLog> workoutLogs) {
+    public WidgetDataProvider(Context context,ContentResolver contentResolver) {
         mContext = context;
-        this.workoutLogs = workoutLogs;
+        this.contentResolver = contentResolver;
     }
 
     @Override
@@ -36,12 +39,19 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public void onDataSetChanged() {
+        Log.e("archit","Inside on data set changed");
 
-    }
-
-    public void onDataSetChanged(List<WorkoutLog> workoutLogs) {
-        this.workoutLogs = workoutLogs;
-        initData();
+        Thread thread = new Thread() {
+            public void run() {
+                initData();
+            }
+        };
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+        }
+        //initData();
     }
 
     @Override
@@ -85,6 +95,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     private void initData() {
 
         mCollection.clear();
+        List<WorkoutLog> workoutLogs = getWorkoutLogs();
         Collections.sort(workoutLogs);
         for (WorkoutLog workoutLog : workoutLogs) {
             String exercise = workoutLog.getExercise();
@@ -95,4 +106,21 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     }
 
+    private List<WorkoutLog> getWorkoutLogs() {
+        Cursor cursor = contentResolver.query(WorkoutLogContract.WLog.buildUri(), null, null, null, null);
+        List<WorkoutLog> workoutLogList = new ArrayList<>();
+        WorkoutLog workoutLog;
+        while(cursor.moveToNext()){
+            int indexExercise = cursor.getColumnIndex(WorkoutLogContract.WLog.COLUMN_LOG_EXERCISE);
+            int indexWeight  = cursor.getColumnIndex(WorkoutLogContract.WLog.COLUMN_LOG_WEIGHT);
+            int indexReps = cursor.getColumnIndex(WorkoutLogContract.WLog.COLUMN_LOG_REPETITIONS);
+            String exercise = cursor.getString(indexExercise);
+            String weight = cursor.getString(indexWeight);
+            String reps = cursor.getString(indexReps);
+            workoutLog = new WorkoutLog(exercise,Integer.parseInt(reps),Float.valueOf(weight));
+            workoutLogList.add(workoutLog);
+            Log.e("archit","Data Fetched From db "+exercise+" "+weight);
+        }
+        return workoutLogList;
+    }
 }

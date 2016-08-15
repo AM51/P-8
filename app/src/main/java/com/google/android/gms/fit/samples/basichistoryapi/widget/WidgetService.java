@@ -26,8 +26,8 @@ public class WidgetService extends RemoteViewsService{
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
 
         Log.e("archit","Returning remote views");
-        List<WorkoutLog> workoutLogList = getWorkoutLogs();
-        widgetDataProvider = new WidgetDataProvider(this, workoutLogList);
+        //List<WorkoutLog> workoutLogList = getWorkoutLogs();
+        widgetDataProvider = new WidgetDataProvider(this, getContentResolver());
         return widgetDataProvider;
     }
 
