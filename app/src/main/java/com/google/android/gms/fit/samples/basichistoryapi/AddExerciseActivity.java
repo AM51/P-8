@@ -50,6 +50,7 @@ public class AddExerciseActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_exercise);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Add New Exercise");
         setSupportActionBar(toolbar);
 
 

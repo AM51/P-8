@@ -54,7 +54,8 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todays_workout);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_today_workout);
+        toolbar.setTitle("Workout Logs");
         setSupportActionBar(toolbar);
 
         fetchWorkoutHistory = (ImageButton) findViewById(R.id.fetchWorkoutHistory);

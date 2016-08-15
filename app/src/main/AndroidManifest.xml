@@ -43,7 +43,7 @@ limitations under the License.
         <!-- </activity> -->
         <activity
             android:name=".MusclesActivity"
-            android:label="@string/title_activity_muscles"
+            android:label="Choose Exercise"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
             <!-- <intent-filter> -->
@@ -64,7 +64,7 @@ limitations under the License.
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddExerciseLogActivity"
-            android:label="@string/title_activity_add_exercise_log"
+            android:label="Add Workout Log"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CalendarActivity"

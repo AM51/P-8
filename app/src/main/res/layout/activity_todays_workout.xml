@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_today_workout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/black"
@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/fetchWorkoutHistory"
                 android:src="@drawable/calendar_1"
+                android:layout_gravity="right"
                 />
             
             </android.support.v7.widget.Toolbar>
@@ -39,6 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        android:src="@drawable/plus_button" />
 
 </android.support.design.widget.CoordinatorLayout>
