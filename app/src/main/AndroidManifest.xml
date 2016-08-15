@@ -58,6 +58,10 @@ limitations under the License.
             android:name=".data.WorkoutExerciseProvider"
             android:authorities="com.google.android.gms.fit.samples" />
 
+        <provider
+            android:name=".data.WorkoutLogsProvider"
+            android:authorities="com.google.android.gms.fit.samples.logs" />
+
         <activity
             android:name=".InsertNewExerciseActivity"
             android:label="@string/title_activity_insert_new_exercise"
@@ -84,6 +88,22 @@ limitations under the License.
             android:name=".AddExerciseActivity"
             android:label="@string/title_activity_add_exercise"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <receiver android:name=".widget.WorkoutLogsWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/collection_widget_info" />
+        </receiver>
+
+        <service android:name=".widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service android:name=".widget.WorkoutLogsIntentService" />
+
     </application>
 
 </manifest>

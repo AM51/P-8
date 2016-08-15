@@ -21,5 +21,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="padding_top">30dp</dimen>
     <dimen name="padding_left">50dp</dimen>
-
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_header_padding">8dp</dimen>
 </resources>

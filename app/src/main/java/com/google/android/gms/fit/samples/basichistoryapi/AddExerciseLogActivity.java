@@ -1,6 +1,8 @@
 package com.google.android.gms.fit.samples.basichistoryapi;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,7 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.gms.fit.samples.basichistoryapi.R;
+import com.google.android.gms.fit.samples.basichistoryapi.data.WorkoutExerciseContract;
+import com.google.android.gms.fit.samples.basichistoryapi.data.WorkoutLogContract;
 import com.google.android.gms.fit.samples.utils.Utils;
+
+import java.util.Date;
+import java.util.UUID;
 
 public class AddExerciseLogActivity extends AppCompatActivity {
 
@@ -47,6 +54,14 @@ public class AddExerciseLogActivity extends AppCompatActivity {
                 WorkoutLog workoutLog = new WorkoutLog(exercise,repsLog,weightLog); //todo add exercise name , weight , reps
                 intent.putExtra(Utils.WORKOUT_LOG,workoutLog);
                 startActivity(intent);
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(WorkoutLogContract.WLog.COLUMN_LOG_ID, UUID.randomUUID().toString());
+                contentValues.put(WorkoutLogContract.WLog.COLUMN_LOG_EXERCISE,exercise);
+                contentValues.put(WorkoutLogContract.WLog.COLUMN_LOG_WEIGHT,String.valueOf(weightLog));
+                contentValues.put(WorkoutLogContract.WLog.COLUMN_LOG_REPETITIONS,String.valueOf(repsLog));
+                contentValues.put(WorkoutLogContract.WLog.COLUMN_TIMESTAMP,new Date().getTime());
+                getApplicationContext().getContentResolver().insert(WorkoutLogContract.WLog.CONTENT_URI, contentValues);
+                Log.e("archit","Exercise log inserted into db");
             }
         });
     }

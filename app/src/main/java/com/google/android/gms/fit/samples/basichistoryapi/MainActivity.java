@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "Inserting the dataset in the History API.");
             com.google.android.gms.common.api.Status insertStatus =
                     Fitness.HistoryApi.insertData(mClient, dataSet)
-                            .await(1, TimeUnit.MINUTES);
+                            .await(2, TimeUnit.MINUTES);
 
             // Before querying the data, check to see if the insertion succeeded.
             if (!insertStatus.isSuccess()) {
