@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by archit.m on 15/08/16.
  */
-public class WidgetService extends RemoteViewsService implements Loader.OnLoadCompleteListener{
+public class WidgetService extends RemoteViewsService{
 
     CursorLoader mCursorLoader;
     WidgetDataProvider widgetDataProvider;
@@ -49,32 +49,32 @@ public class WidgetService extends RemoteViewsService implements Loader.OnLoadCo
         return workoutLogList;
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        mCursorLoader = new CursorLoader(getApplicationContext(),WorkoutLogContract.WLog.CONTENT_URI, null, null, null, null);
-        mCursorLoader.registerListener(0, this);
-        mCursorLoader.startLoading();
-    }
-
-    @Override
-    public void onLoadComplete(Loader loader, Object data) {
-        Log.e("archit","data set changed");
-        List<WorkoutLog> workoutLogs = getWorkoutLogs();
-        Log.e("archit","Workout Logs Size :: "+workoutLogs.size());
-        widgetDataProvider.onDataSetChanged(workoutLogs);
-    }
-
-    @Override
-    public void onDestroy() {
-
-        if (mCursorLoader != null) {
-            mCursorLoader.unregisterListener(this);
-            mCursorLoader.cancelLoad();
-            mCursorLoader.stopLoading();
-        }
-
-    }
+//    @Override
+//    public void onCreate() {
+//        super.onCreate();
+//        mCursorLoader = new CursorLoader(getApplicationContext(),WorkoutLogContract.WLog.CONTENT_URI, null, null, null, null);
+//        mCursorLoader.registerListener(0, this);
+//        mCursorLoader.startLoading();
+//    }
+//
+//    @Override
+//    public void onLoadComplete(Loader loader, Object data) {
+//        Log.e("archit","data set changed");
+//        List<WorkoutLog> workoutLogs = getWorkoutLogs();
+//        Log.e("archit","Workout Logs Size :: "+workoutLogs.size());
+//        widgetDataProvider.onDataSetChanged(workoutLogs);
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//
+//        if (mCursorLoader != null) {
+//            mCursorLoader.unregisterListener(this);
+//            mCursorLoader.cancelLoad();
+//            mCursorLoader.stopLoading();
+//        }
+//
+//    }
 
 
 }

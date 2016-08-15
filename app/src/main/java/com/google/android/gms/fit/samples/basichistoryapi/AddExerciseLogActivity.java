@@ -16,6 +16,8 @@ import android.widget.EditText;
 import com.google.android.gms.fit.samples.basichistoryapi.R;
 import com.google.android.gms.fit.samples.basichistoryapi.data.WorkoutExerciseContract;
 import com.google.android.gms.fit.samples.basichistoryapi.data.WorkoutLogContract;
+import com.google.android.gms.fit.samples.basichistoryapi.widget.WidgetDataProvider;
+import com.google.android.gms.fit.samples.basichistoryapi.widget.WorkoutLogsWidget;
 import com.google.android.gms.fit.samples.utils.Utils;
 
 import java.util.Date;
@@ -61,6 +63,10 @@ public class AddExerciseLogActivity extends AppCompatActivity {
                 contentValues.put(WorkoutLogContract.WLog.COLUMN_LOG_REPETITIONS,String.valueOf(repsLog));
                 contentValues.put(WorkoutLogContract.WLog.COLUMN_TIMESTAMP,new Date().getTime());
                 getApplicationContext().getContentResolver().insert(WorkoutLogContract.WLog.CONTENT_URI, contentValues);
+                //Intent i = new Intent(getApplicationContext(), WorkoutLogsWidget.class);
+                Intent i = new Intent(WorkoutLogsWidget.DATABASE_CHANGED);
+                //i.setAction(WorkoutLogsWidget.DATABASE_CHANGED);
+                getApplicationContext().sendBroadcast(i);
                 Log.e("archit","Exercise log inserted into db");
             }
         });

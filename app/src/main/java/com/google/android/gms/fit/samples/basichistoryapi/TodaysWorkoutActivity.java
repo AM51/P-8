@@ -76,7 +76,7 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
         listView.setAdapter(workoutLogsAdapter);
 
         //long currentDayTimeInMillis = getCurrentDayTimeInMillis();
-        currentDayTimeInMillis = 1471199400000L;
+        currentDayTimeInMillis = 1471285800000L;
         new InsertAndVerifyDataTask().execute(currentDayTimeInMillis);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

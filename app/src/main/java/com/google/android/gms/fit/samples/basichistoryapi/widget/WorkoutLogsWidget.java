@@ -24,6 +24,8 @@ import com.google.android.gms.fit.samples.basichistoryapi.data.WorkoutLogContrac
  */
 public class WorkoutLogsWidget extends AppWidgetProvider {
 
+    public static final String DATABASE_CHANGED = "utimetable.DATABASE_CHANGED";
+
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.collection_widget);
@@ -81,6 +83,19 @@ public class WorkoutLogsWidget extends AppWidgetProvider {
                 new Intent(context, WidgetService.class));
     }
 
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (action.equals(DATABASE_CHANGED) || action.equals(Intent.ACTION_DATE_CHANGED))
+        {
+            AppWidgetManager gm = AppWidgetManager.getInstance(context);
+            int[] ids = gm.getAppWidgetIds(new ComponentName(context, WidgetDataProvider.class));
+            this.onUpdate(context, gm, ids);
+        }
+        else
+        {
+            super.onReceive(context, intent);
+        }
 
-
+    }
 }
