@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AddExerciseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,View.OnClickListener {
 
     private static List<String> muscles;
@@ -41,9 +44,9 @@ public class AddExerciseActivity extends AppCompatActivity implements AdapterVie
 
     String muscleCategorySelected;
 
-    Spinner muscleCategories;
-    Button addExerciseButton;
-    EditText exerciseName;
+    @BindView(R.id.musclesCategories) Spinner muscleCategories;
+    @BindView(R.id.addExercise) Button addExerciseButton;
+    @BindView(R.id.exerciseName) EditText exerciseName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +57,10 @@ public class AddExerciseActivity extends AppCompatActivity implements AdapterVie
         setSupportActionBar(toolbar);
 
 
-        muscleCategories = (Spinner)findViewById(R.id.musclesCategories);
-        addExerciseButton = (Button)findViewById(R.id.addExercise);
-        exerciseName = (EditText)findViewById(R.id.exerciseName);
+        ButterKnife.bind(this);
+//        muscleCategories = (Spinner)findViewById(R.id.musclesCategories);
+//        addExerciseButton = (Button)findViewById(R.id.addExercise);
+//        exerciseName = (EditText)findViewById(R.id.exerciseName);
         addExerciseButton.setOnClickListener(this);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,muscles);
         muscleCategories.setAdapter(arrayAdapter);

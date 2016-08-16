@@ -23,11 +23,14 @@ import com.google.android.gms.fit.samples.utils.Utils;
 import java.util.Date;
 import java.util.UUID;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AddExerciseLogActivity extends AppCompatActivity {
 
-    Button saveButton;
-    EditText weightEntry;
-    EditText repsEntry;
+    @BindView(R.id.saveExerciseLog) Button saveButton;
+    @BindView(R.id.weight_entry) EditText weightEntry;
+    @BindView(R.id.reps_entry) EditText repsEntry;
 
     private int reps;
     private float weight;
@@ -43,9 +46,10 @@ public class AddExerciseLogActivity extends AppCompatActivity {
         Intent intent = getIntent();
         exercise = intent.getStringExtra(Utils.EXERCISE_NAME);
         Log.e("archit",exercise+ " wohoo");
-        saveButton = (Button)findViewById(R.id.saveExerciseLog);
-        weightEntry = (EditText)findViewById(R.id.weight_entry);
-        repsEntry = (EditText)findViewById(R.id.reps_entry);
+        ButterKnife.bind(this);
+//        saveButton = (Button)findViewById(R.id.saveExerciseLog);
+//        weightEntry = (EditText)findViewById(R.id.weight_entry);
+//        repsEntry = (EditText)findViewById(R.id.reps_entry);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

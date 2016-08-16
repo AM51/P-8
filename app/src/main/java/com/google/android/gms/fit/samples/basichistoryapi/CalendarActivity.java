@@ -12,10 +12,13 @@ import android.widget.CalendarView;
 
 import com.google.android.gms.fit.samples.utils.Utils;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class CalendarActivity extends AppCompatActivity {
 
 
-    CalendarView calendarView;
+    @BindView(R.id.calendar) CalendarView calendarView;
     long dateSelected;
 
     @Override
@@ -25,7 +28,8 @@ public class CalendarActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        calendarView = (CalendarView)findViewById(R.id.calendar);
+        ButterKnife.bind(this);
+//        calendarView = (CalendarView)findViewById(R.id.calendar);
         dateSelected = calendarView.getDate();
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
