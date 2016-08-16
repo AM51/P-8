@@ -10,7 +10,9 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.google.android.gms.fit.samples.basichistoryapi.WorkoutLog;
+import com.google.android.gms.fit.samples.basichistoryapi.data.WorkoutExerciseContract;
 import com.google.android.gms.fit.samples.basichistoryapi.data.WorkoutLogContract;
+import com.google.android.gms.fit.samples.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +24,8 @@ import java.util.List;
 public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory {
 
     private static final String TAG = "WidgetDataProvider";
+    private static final String selection = WorkoutLogContract.WLog.TABLE_NAME+"."+ WorkoutLogContract.WLog.COLUMN_TIMESTAMP+"> ?";
+
 
     ContentResolver contentResolver;
     List<String> mCollection = new ArrayList<>();
@@ -107,7 +111,8 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     }
 
     private List<WorkoutLog> getWorkoutLogs() {
-        Cursor cursor = contentResolver.query(WorkoutLogContract.WLog.buildUri(), null, null, null, null);
+        long timestampForStartOfToday = Utils.getTimeStampForStartOfToday();
+        Cursor cursor = contentResolver.query(WorkoutLogContract.WLog.buildUri(), null, selection, new String[]{String.valueOf(timestampForStartOfToday)}, null);
         List<WorkoutLog> workoutLogList = new ArrayList<>();
         WorkoutLog workoutLog;
         while(cursor.moveToNext()){

@@ -34,6 +34,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.google.android.gms.fitness.data.Field.FIELD_EXERCISE;
 import static com.google.android.gms.fitness.data.Field.FIELD_REPETITIONS;
 import static com.google.android.gms.fitness.data.Field.FIELD_RESISTANCE;
@@ -41,7 +44,7 @@ import static java.text.DateFormat.getTimeInstance;
 
 public class TodaysWorkoutActivity extends AppCompatActivity {
 
-    ImageButton fetchWorkoutHistory;
+    @BindView(R.id.fetchWorkoutHistory) ImageButton fetchWorkoutHistory;
     static final int WORKOUT_LOGS_REQUEST = 1;
     public static GoogleApiClient mClient = null;
     private WorkoutLogsAdapter workoutLogsAdapter;
@@ -58,7 +61,9 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
         toolbar.setTitle("Workout Logs");
         setSupportActionBar(toolbar);
 
-        fetchWorkoutHistory = (ImageButton) findViewById(R.id.fetchWorkoutHistory);
+        ButterKnife.setDebug(true);
+        ButterKnife.bind(this);
+        //fetchWorkoutHistory = (ImageButton) findViewById(R.id.fetchWorkoutHistory);
         fetchWorkoutHistory.setBackground(null);
 
         buildFitnessClient();
@@ -76,7 +81,7 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
         listView.setAdapter(workoutLogsAdapter);
 
         //long currentDayTimeInMillis = getCurrentDayTimeInMillis();
-        currentDayTimeInMillis = 1471285800000L;
+        currentDayTimeInMillis = Utils.getTimeStampForStartOfToday();
         new InsertAndVerifyDataTask().execute(currentDayTimeInMillis);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

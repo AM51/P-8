@@ -73,6 +73,7 @@
         android:id="@+id/saveExerciseLog"
         android:layout_below="@+id/weight_reps"
         android:layout_centerHorizontal="true"
+        android:contentDescription="@string/saveExerciseLog"
         android:layout_marginTop="15dp" />
 
 

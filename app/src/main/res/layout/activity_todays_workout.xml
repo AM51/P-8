@@ -26,6 +26,7 @@
                 android:id="@+id/fetchWorkoutHistory"
                 android:src="@drawable/calendar_1"
                 android:layout_gravity="right"
+                android:contentDescription="@string/fetchWorkoutHistory"
                 />
             
             </android.support.v7.widget.Toolbar>
@@ -40,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:contentDescription="@string/addExercise"
         android:src="@drawable/plus_button" />
 
 </android.support.design.widget.CoordinatorLayout>

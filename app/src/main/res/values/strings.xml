@@ -26,5 +26,9 @@
     <string name="title_activity_calendar">CalendarActivity</string>
     <string name="title_activity_todays_workout">TodaysWorkoutActivity</string>
     <string name="title_activity_add_exercise">AddExerciseActivity</string>
+    <string name="fetchWorkoutHistory">Fetch Workout History</string>
+    <string name="addExercise">Add Exercise To Workout</string>
+    <string name="addNewExercise">Add New Exercise</string>
+    <string name="saveExerciseLog">Save Exercise Log</string>
 
 </resources>

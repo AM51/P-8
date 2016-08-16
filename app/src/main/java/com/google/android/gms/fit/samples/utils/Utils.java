@@ -1,5 +1,8 @@
 package com.google.android.gms.fit.samples.utils;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by archit.m on 03/08/16.
  */
@@ -17,6 +20,23 @@ public class Utils {
     public static final String MUSCLE_SHOULDERS = "shoulders";
     public static final String MUSCLE_TRICEPS = "triceps";
     public static final String MUSCLE_LEGS = "legs";
+
+    public static long getTimeStampForStartOfToday(){
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        int month = now.get(Calendar.MONTH) + 1; // Note: zero based!
+        int day = now.get(Calendar.DAY_OF_MONTH);
+        int hour = now.get(Calendar.HOUR_OF_DAY);
+        int minute = now.get(Calendar.MINUTE);
+        int second = now.get(Calendar.SECOND);
+        int millis = now.get(Calendar.MILLISECOND);
+
+        long currentTimeStamp = (new Date()).getTime();
+
+        long timeStampForStartOfDay  = currentTimeStamp - ((hour*3600000)+(minute*60000)+(second*1000)+millis);
+
+        return timeStampForStartOfDay;
+    }
 
 
 }
