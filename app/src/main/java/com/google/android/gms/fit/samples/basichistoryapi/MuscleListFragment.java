@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.google.android.gms.fit.samples.common.logger.Log;
 
@@ -36,7 +35,7 @@ public class MuscleListFragment extends ListFragment implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.e("test","Inside On Item Click");
-        Toast.makeText(getActivity().getApplicationContext(), "Itemm: " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(), "Itemm: " + position, Toast.LENGTH_SHORT).show();
         String muscleSelected = (String)getListAdapter().getItem(position);
         Log.e("test",muscleSelected);
         ((MuscleFragmentCallback)getActivity()).onItemSelected(muscleSelected);

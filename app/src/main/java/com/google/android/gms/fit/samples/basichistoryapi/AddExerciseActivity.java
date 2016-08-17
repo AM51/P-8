@@ -72,7 +72,7 @@ public class AddExerciseActivity extends AppCompatActivity implements AdapterVie
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
         muscleCategorySelected = item;
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -83,9 +83,14 @@ public class AddExerciseActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onClick(View v) {
 
-        String exerciseNameText = exerciseName.getText().toString();
-        Toast.makeText(getApplicationContext(), "Selected: " + exerciseNameText+" "+muscleCategorySelected, Toast.LENGTH_LONG).show();
-        insertIntoDb(muscleCategorySelected,exerciseNameText);
+        Editable exerciseNameText = exerciseName.getText();
+
+        if(exerciseName == null || Utils.isEmptyString(exerciseName.getText().toString())){
+            Toast.makeText(getApplicationContext(), "Please select exercise name", Toast.LENGTH_LONG).show();
+        } else {
+            //Toast.makeText(getApplicationContext(), "Selected: " + exerciseNameText + " " + muscleCategorySelected, Toast.LENGTH_LONG).show();
+            insertIntoDb(muscleCategorySelected, exerciseNameText.toString());
+        }
 
     }
 
