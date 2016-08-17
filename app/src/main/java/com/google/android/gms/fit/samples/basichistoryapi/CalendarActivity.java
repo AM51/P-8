@@ -29,6 +29,10 @@ public class CalendarActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
+        Intent intent = getIntent();
+        long currentDateSelected = intent.getLongExtra(Utils.CURRENT_DATE_SELECTED, Utils.getTimeStampForStartOfToday());
+        calendarView.setDate(currentDateSelected);
+
 //        calendarView = (CalendarView)findViewById(R.id.calendar);
         dateSelected = calendarView.getDate();
 

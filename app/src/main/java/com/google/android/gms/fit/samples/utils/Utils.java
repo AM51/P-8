@@ -20,6 +20,7 @@ public class Utils {
     public static final String MUSCLE_SHOULDERS = "shoulders";
     public static final String MUSCLE_TRICEPS = "triceps";
     public static final String MUSCLE_LEGS = "legs";
+    public static final String CURRENT_DATE_SELECTED = "current_date";
 
     public static long getTimeStampForStartOfToday(){
         Calendar now = Calendar.getInstance();

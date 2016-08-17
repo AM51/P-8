@@ -67,11 +67,13 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
         fetchWorkoutHistory.setBackground(null);
 
         buildFitnessClient();
+        currentDayTimeInMillis = Utils.getTimeStampForStartOfToday();
         fetchWorkoutHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("archit", "Fetching History");
                 Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+                intent.putExtra(Utils.CURRENT_DATE_SELECTED,currentDayTimeInMillis);
                 startActivityForResult(intent, WORKOUT_LOGS_REQUEST);
             }
         });
@@ -81,7 +83,6 @@ public class TodaysWorkoutActivity extends AppCompatActivity {
         listView.setAdapter(workoutLogsAdapter);
 
         //long currentDayTimeInMillis = getCurrentDayTimeInMillis();
-        currentDayTimeInMillis = Utils.getTimeStampForStartOfToday();
         new InsertAndVerifyDataTask().execute(currentDayTimeInMillis);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
