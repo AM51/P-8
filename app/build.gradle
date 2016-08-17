@@ -1,13 +1,22 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+def keystoreProperties = new Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     signingConfigs {
         config {
-            keyAlias 'AndroidKeyArchitM'
-            keyPassword 'archit08android'
-            storeFile file('/Users/archit.m/AndroidStudioProjects/android-fit/BasicHistoryApi/android.jks')
-            storePassword 'archit0851'
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
     }
     compileSdkVersion 23
