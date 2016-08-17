@@ -56,7 +56,7 @@ public class ExerciseListFragment extends ListFragment implements LoaderManager.
 
         String exercise = (String) this.getListAdapter().getItem(position);
         Log.e("archit",exercise);
-        Intent intent = new Intent(getActivity().getApplicationContext(), AddExerciseLogActivity.class);
+        Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
         intent.putExtra(Utils.EXERCISE_NAME,exercise);
         startActivity(intent);
 //        Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
