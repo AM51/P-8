@@ -1,8 +1,10 @@
 package com.google.android.gms.fit.samples.basichistoryapi;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -14,6 +16,9 @@ import com.google.android.gms.fit.samples.basichistoryapi.data.WorkoutExerciseCo
 import com.google.android.gms.fit.samples.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by archit.m on 02/08/16.
@@ -30,7 +35,6 @@ public class ExerciseListAdapter extends BaseAdapter{
         //strings.add("Curl");
         //strings.add("Press");
     }
-
 
     @Override
     public int getCount() {
@@ -74,9 +78,31 @@ public class ExerciseListAdapter extends BaseAdapter{
             strings.add(exerciseName);
             Log.e("test","List element from db: "+exerciseName+" "+category);
         }
+
+        List<String> inbuiltExercises = getInbuiltExercises(muscle);
+        strings.addAll(inbuiltExercises);
+
     }
 
-    public void setStrings(ArrayList<String> strings) {
+    public void setStrings(ArrayList<String> strings, String selectedMuscle) {
+        List<String> inbuiltExercises = getInbuiltExercises(selectedMuscle);
+        strings.addAll(inbuiltExercises);
         this.strings = strings;
+    }
+
+    public  List<String> getInbuiltExercises(String muscle){
+
+        switch (muscle){
+            case Utils.MUSCLE_CHEST:
+                return Arrays.asList("Chest1","Chest2");
+            case Utils.MUSCLE_BICEPS:
+                return Arrays.asList("Biceps1","Biceps2");
+            case Utils.MUSCLE_BACK:
+                return Arrays.asList("Back1","Back2");
+            default:
+                return Arrays.asList("Test1","Test2");
+
+        }
+
     }
 }

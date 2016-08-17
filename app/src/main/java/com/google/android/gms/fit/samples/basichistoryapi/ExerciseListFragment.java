@@ -88,7 +88,7 @@ public class ExerciseListFragment extends ListFragment implements LoaderManager.
             Log.e("test","exercise fetched :: "+exerciseName);
             exerciseList.add(exerciseName);
         }
-        exerciseListAdapter.setStrings(exerciseList);
+        exerciseListAdapter.setStrings(exerciseList,selectedMuscle);
         exerciseListAdapter.notifyDataSetChanged();
         Log.e("test","Loading finished");
     }

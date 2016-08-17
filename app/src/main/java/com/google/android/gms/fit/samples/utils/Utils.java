@@ -1,7 +1,10 @@
 package com.google.android.gms.fit.samples.utils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by archit.m on 03/08/16.
