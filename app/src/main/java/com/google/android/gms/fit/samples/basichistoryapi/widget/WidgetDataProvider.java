@@ -105,7 +105,7 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
             String exercise = workoutLog.getExercise();
             String weight = String.valueOf(workoutLog.getWeight());
             String repetitions = String.valueOf(workoutLog.getRepetitions());
-            mCollection.add(exercise+" "+weight+ " "+repetitions);
+            mCollection.add(exercise+" "+weight+ " (w) "+repetitions+" (r)");
         }
 
     }

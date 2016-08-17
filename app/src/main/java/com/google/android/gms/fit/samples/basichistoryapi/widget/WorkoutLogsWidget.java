@@ -32,7 +32,7 @@ public class WorkoutLogsWidget extends AppWidgetProvider {
 
         Log.e("archit","Updating App");
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.collection_widget);
-        views.setTextViewText(R.id.widget_header, "changed");
+        views.setTextViewText(R.id.widget_header, "Todays Workout");
 
         //context.startService(new Intent(context, WorkoutLogsIntentService.class));
 
