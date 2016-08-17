@@ -203,6 +203,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //i.setAction(WorkoutLogsWidget.DATABASE_CHANGED);
             getApplicationContext().sendBroadcast(i);
             Log.e("archit", "Exercise log inserted into db");
+            Snackbar snackbar = Snackbar
+                    .make(v, "Exercise Log Saved", Snackbar.LENGTH_SHORT);
+
+            snackbar.show();
+            weightEntry.setText("");
+            repsEntry.setText("");
 
         }
 

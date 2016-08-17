@@ -99,6 +99,12 @@ public class ExerciseListAdapter extends BaseAdapter{
                 return Arrays.asList("Biceps1","Biceps2");
             case Utils.MUSCLE_BACK:
                 return Arrays.asList("Back1","Back2");
+            case Utils.MUSCLE_LEGS:
+                return Arrays.asList("Legs1","Legs2");
+            case Utils.MUSCLE_SHOULDERS:
+                return Arrays.asList("Shoulders1","Shoulders2");
+            case Utils.MUSCLE_TRICEPS:
+                return Arrays.asList("Triceps1","Triceps2");
             default:
                 return Arrays.asList("Test1","Test2");
 
