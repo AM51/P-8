@@ -30,5 +30,8 @@
     <string name="addExercise">Add Exercise To Workout</string>
     <string name="addNewExercise">Add New Exercise</string>
     <string name="saveExerciseLog">Save Exercise Log</string>
+    <string name="addExerciseButton">Add</string>
+    <string name="add_new_exercise">Add New Exercise</string>
+    <string name="add_exercise_textview_text">Name</string>
 
 </resources>

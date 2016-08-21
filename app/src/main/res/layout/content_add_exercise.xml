@@ -18,10 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:paddingTop="@dimen/padding_top"
-        android:paddingLeft="20dp"
+        android:paddingLeft="@dimen/add_exercise_textview_padding"
+        android:paddingStart="@dimen/add_exercise_textview_padding"
         android:id="@+id/textView"
         android:textColor="@android:color/black"
-        android:text="Name"/>
+        android:text="@string/add_exercise_textview_text"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -33,13 +34,14 @@
         android:id="@+id/musclesCategories"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
+        android:paddingLeft="@dimen/add_exercise_spinner_padding"
+        android:paddingStart="@dimen/add_exercise_spinner_padding"
         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="Add"
+        android:text="@string/addExerciseButton"
         android:id="@+id/addExercise"
         android:contentDescription="@string/addNewExercise"
         android:layout_gravity="center_horizontal" />

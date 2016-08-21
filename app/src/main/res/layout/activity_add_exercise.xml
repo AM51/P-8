@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/black"
             android:titleTextColor="@android:color/white"
-            android:title="Add New Exercise"
+            android:title="@string/add_new_exercise"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
